@@ -29,6 +29,88 @@ body {
   background: #94a3b8;
 }
 
+/* Modern Flatpickr Calendar Styling */
+.flatpickr-calendar {
+  background: #ffffff !important;
+  border: 1px solid #e4e4e7 !important;
+  border-radius: 6px !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+  font-family: inherit !important;
+  width: 300px !important;
+  padding: 8px !important;
+}
+
+.flatpickr-calendar::before,
+.flatpickr-calendar::after {
+  display: none !important;
+}
+
+.flatpickr-months {
+  padding: 4px 0 !important;
+}
+
+.flatpickr-current-month {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #18181b !important;
+}
+
+.flatpickr-months .flatpickr-prev-month,
+.flatpickr-months .flatpickr-next-month {
+  padding: 6px !important;
+  border-radius: 4px !important;
+  fill: #71717a !important;
+}
+
+.flatpickr-months .flatpickr-prev-month:hover,
+.flatpickr-months .flatpickr-next-month:hover {
+  background: #f4f4f5 !important;
+  fill: #18181b !important;
+}
+
+span.flatpickr-weekday {
+  color: #71717a !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+}
+
+.flatpickr-day {
+  border-radius: 4px !important;
+  color: #27272a !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  height: 34px !important;
+  line-height: 34px !important;
+  max-width: 34px !important;
+  margin: 2px !important;
+}
+
+.flatpickr-day:hover {
+  background: #f4f4f5 !important;
+  border-color: #f4f4f5 !important;
+}
+
+.flatpickr-day.today {
+  border-color: #3b82f6 !important;
+  background: transparent !important;
+  color: #2563eb !important;
+  font-weight: 700 !important;
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover {
+  background: #2563eb !important;
+  border-color: #2563eb !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+.flatpickr-day.prevMonthDay,
+.flatpickr-day.nextMonthDay {
+  color: #d4d4d8 !important;
+}
+
 /* Print Styles */
 @media print {
   @page {
@@ -60,3 +142,5 @@ body {
     max-width: 100% !important;
   }
 }
+
+

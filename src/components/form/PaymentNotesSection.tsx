@@ -2,8 +2,9 @@ import React from "react";
 import { useInvoiceStore } from "@/store/useInvoiceStore";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
-import { Select } from "@/components/ui/Select";
-import { Landmark, FileCheck } from "lucide-react";
+import { Select2, Select2Option } from "@/components/ui/Select2";
+import { DatePicker } from "@/components/ui/DatePicker";
+import { Landmark, FileCheck, CreditCard } from "lucide-react";
 
 export function PaymentNotesSection() {
   const {
@@ -14,6 +15,44 @@ export function PaymentNotesSection() {
     setTerms,
   } = useInvoiceStore();
   const { paymentDetails, notes, terms, signature } = invoice;
+
+  const paymentMethodOptions: Select2Option[] = [
+    {
+      value: "bank_transfer",
+      label: "Direct Bank Transfer (Wire / ACH)",
+      subLabel: "SWIFT, IBAN, Routing",
+      badge: "Bank",
+    },
+    {
+      value: "stripe",
+      label: "Stripe / Online Checkout Link",
+      subLabel: "Credit Card, Apple Pay",
+      badge: "Card",
+    },
+    {
+      value: "paypal",
+      label: "PayPal",
+      subLabel: "Instant checkout",
+      badge: "PayPal",
+    },
+    {
+      value: "upi",
+      label: "UPI / Instant Transfer",
+      subLabel: "VPA & QR",
+      badge: "UPI",
+    },
+    {
+      value: "crypto",
+      label: "Cryptocurrency",
+      subLabel: "BTC, ETH, USDT",
+      badge: "Crypto",
+    },
+    {
+      value: "custom",
+      label: "Custom Instructions",
+      subLabel: "Manual terms",
+    },
+  ];
 
   return (
     <div className="space-y-4">
@@ -27,12 +66,12 @@ export function PaymentNotesSection() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          <Select
+          <Select2
             label="Payment Method"
             value={paymentDetails.method}
-            onChange={(e) =>
+            onChange={(val) =>
               updatePaymentDetails({
-                method: e.target.value as
+                method: val as
                   | "bank_transfer"
                   | "paypal"
                   | "stripe"
@@ -41,14 +80,9 @@ export function PaymentNotesSection() {
                   | "custom",
               })
             }
-          >
-            <option value="bank_transfer">Direct Bank Transfer (Wire / ACH)</option>
-            <option value="stripe">Stripe / Online Payment Link</option>
-            <option value="paypal">PayPal</option>
-            <option value="upi">UPI / Instant Transfer</option>
-            <option value="crypto">Cryptocurrency</option>
-            <option value="custom">Custom Instructions</option>
-          </Select>
+            options={paymentMethodOptions}
+            prefixElement={<CreditCard className="h-3.5 w-3.5" />}
+          />
 
           {paymentDetails.method === "bank_transfer" && (
             <Input
@@ -184,19 +218,20 @@ export function PaymentNotesSection() {
               })
             }
           />
-          <Input
+          <DatePicker
             label="Signing Date"
-            type="date"
             value={signature?.date || ""}
-            onChange={(e) =>
+            onChange={(dateStr) =>
               updateSignature({
                 type: "typed",
-                date: e.target.value,
+                date: dateStr,
               })
             }
+            placeholder="Select signing date"
           />
         </div>
       </div>
     </div>
   );
 }
+

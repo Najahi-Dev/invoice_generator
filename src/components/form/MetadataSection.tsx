@@ -1,10 +1,11 @@
 import React from "react";
 import { useInvoiceStore } from "@/store/useInvoiceStore";
 import { Input } from "@/components/ui/Input";
-import { Select } from "@/components/ui/Select";
+import { Select2 } from "@/components/ui/Select2";
+import { DatePicker } from "@/components/ui/DatePicker";
 import { CURRENCY_LIST } from "@/lib/utils/currency";
 import { CurrencyCode, PaymentTerms } from "@/types/invoice";
-import { RefreshCw, Calendar, Hash, DollarSign } from "lucide-react";
+import { RefreshCw, Hash, DollarSign, Clock } from "lucide-react";
 
 export function MetadataSection() {
   const {
@@ -16,14 +17,20 @@ export function MetadataSection() {
   } = useInvoiceStore();
   const { metadata, title } = invoice;
 
-  const paymentTermsOptions: { value: PaymentTerms; label: string }[] = [
+  const currencyOptions = CURRENCY_LIST.map((c) => ({
+    value: c.code,
+    label: `${c.code} - ${c.name}`,
+    badge: c.symbol,
+  }));
+
+  const paymentTermsOptions: { value: PaymentTerms; label: string; subLabel?: string }[] = [
     { value: "due_on_receipt", label: "Due on Receipt" },
-    { value: "net_7", label: "Net 7 Days" },
-    { value: "net_15", label: "Net 15 Days" },
-    { value: "net_30", label: "Net 30 Days" },
-    { value: "net_45", label: "Net 45 Days" },
-    { value: "net_60", label: "Net 60 Days" },
-    { value: "net_90", label: "Net 90 Days" },
+    { value: "net_7", label: "Net 7 Days", subLabel: "+7 days" },
+    { value: "net_15", label: "Net 15 Days", subLabel: "+15 days" },
+    { value: "net_30", label: "Net 30 Days", subLabel: "+30 days" },
+    { value: "net_45", label: "Net 45 Days", subLabel: "+45 days" },
+    { value: "net_60", label: "Net 60 Days", subLabel: "+60 days" },
+    { value: "net_90", label: "Net 90 Days", subLabel: "+90 days" },
     { value: "custom", label: "Custom Due Date" },
   ];
 
@@ -39,18 +46,14 @@ export function MetadataSection() {
         />
 
         <div className="w-full">
-          <Select
+          <Select2
             label="Currency"
             value={metadata.currency}
-            onChange={(e) => setCurrency(e.target.value as CurrencyCode)}
+            onChange={(val) => setCurrency(val as CurrencyCode)}
+            options={currencyOptions}
+            searchPlaceholder="Search currency by name or code (e.g. USD, EUR, LKR)..."
             prefixElement={<DollarSign className="h-3.5 w-3.5" />}
-          >
-            {CURRENCY_LIST.map((c) => (
-              <option key={c.code} value={c.code}>
-                {c.code} - {c.name}
-              </option>
-            ))}
-          </Select>
+          />
         </div>
       </div>
 
@@ -86,36 +89,29 @@ export function MetadataSection() {
 
       {/* Dates and Terms */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-        <Input
+        <DatePicker
           label="Issue Date"
-          type="date"
           value={metadata.issueDate}
-          onChange={(e) => updateMetadata({ issueDate: e.target.value })}
-          prefixElement={<Calendar className="h-3.5 w-3.5" />}
+          onChange={(dateStr) => updateMetadata({ issueDate: dateStr })}
+          placeholder="Select issue date"
         />
 
-        <Select
+        <Select2
           label="Payment Terms"
           value={metadata.paymentTerms}
-          onChange={(e) =>
-            updateMetadata({ paymentTerms: e.target.value as PaymentTerms })
-          }
-        >
-          {paymentTermsOptions.map((term) => (
-            <option key={term.value} value={term.value}>
-              {term.label}
-            </option>
-          ))}
-        </Select>
+          onChange={(val) => updateMetadata({ paymentTerms: val as PaymentTerms })}
+          options={paymentTermsOptions}
+          prefixElement={<Clock className="h-3.5 w-3.5" />}
+        />
 
-        <Input
+        <DatePicker
           label="Due Date"
-          type="date"
           value={metadata.dueDate}
-          onChange={(e) => updateMetadata({ dueDate: e.target.value })}
-          prefixElement={<Calendar className="h-3.5 w-3.5" />}
+          onChange={(dateStr) => updateMetadata({ dueDate: dateStr })}
+          placeholder="Select due date"
         />
       </div>
     </div>
   );
 }
+
