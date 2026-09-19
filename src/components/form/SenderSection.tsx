@@ -1,19 +1,24 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useInvoiceStore } from "@/store/useInvoiceStore";
 import { Input } from "@/components/ui/Input";
+import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import { Upload, X, Building2, Globe, Mail, Phone } from "lucide-react";
 
 export function SenderSection() {
   const { invoice, updateSender } = useInvoiceStore();
   const { sender } = invoice;
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     if (file.size > 2 * 1024 * 1024) {
-      alert("Image size should be under 2MB.");
+      setErrorMessage("The selected image exceeds 2MB. Please upload an image under 2MB (PNG, JPG, or SVG).");
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
       return;
     }
 
@@ -175,6 +180,17 @@ export function SenderSection() {
           </div>
         </div>
       </div>
+
+      {/* Professional Alert Dialog for File Validation */}
+      <ConfirmDialog
+        isOpen={Boolean(errorMessage)}
+        onClose={() => setErrorMessage(null)}
+        title="Invalid File Size"
+        description={errorMessage}
+        type="warning"
+        isAlertOnly={true}
+        confirmText="Understood"
+      />
     </div>
   );
 }

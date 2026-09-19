@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Modal } from "@/components/ui/Modal";
+import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import { useInvoiceStore } from "@/store/useInvoiceStore";
 import { formatCurrency } from "@/lib/utils/currency";
 import { Button } from "@/components/ui/Button";
@@ -22,6 +23,7 @@ export function DraftsModal({ isOpen, onClose }: DraftsModalProps) {
   } = useInvoiceStore();
 
   const [savedNotice, setSavedNotice] = useState(false);
+  const [draftToDelete, setDraftToDelete] = useState<string | null>(null);
 
   const handleSaveCurrent = () => {
     saveCurrentDraft();
@@ -34,10 +36,15 @@ export function DraftsModal({ isOpen, onClose }: DraftsModalProps) {
     onClose();
   };
 
-  const handleDelete = (e: React.MouseEvent, id: string) => {
+  const handleDeleteClick = (e: React.MouseEvent, id: string) => {
     e.stopPropagation();
-    if (confirm("Are you sure you want to delete this invoice draft?")) {
-      deleteDraft(id);
+    setDraftToDelete(id);
+  };
+
+  const handleConfirmDelete = () => {
+    if (draftToDelete) {
+      deleteDraft(draftToDelete);
+      setDraftToDelete(null);
     }
   };
 
@@ -144,7 +151,7 @@ export function DraftsModal({ isOpen, onClose }: DraftsModalProps) {
                     </div>
 
                     <button
-                      onClick={(e) => handleDelete(e, draft.id)}
+                      onClick={(e) => handleDeleteClick(e, draft.id)}
                       className="p-1.5 text-zinc-400 hover:text-rose-600 hover:bg-rose-50 rounded-[4px] transition-colors cursor-pointer"
                       title="Delete draft"
                       aria-label="Delete draft"
@@ -158,6 +165,18 @@ export function DraftsModal({ isOpen, onClose }: DraftsModalProps) {
           </div>
         )}
       </div>
+
+      {/* Professional Confirmation Dialog */}
+      <ConfirmDialog
+        isOpen={Boolean(draftToDelete)}
+        onClose={() => setDraftToDelete(null)}
+        onConfirm={handleConfirmDelete}
+        title="Delete Invoice Draft"
+        description="Are you sure you want to delete this invoice draft? This action cannot be undone."
+        type="danger"
+        confirmText="Delete Draft"
+        cancelText="Keep Draft"
+      />
     </Modal>
   );
 }

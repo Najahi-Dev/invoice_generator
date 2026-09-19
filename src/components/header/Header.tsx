@@ -14,6 +14,7 @@ import {
   Edit3,
 } from "lucide-react";
 import { DraftsModal } from "./DraftsModal";
+import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import { TemplateTheme } from "@/types/invoice";
 
 export function Header() {
@@ -28,6 +29,43 @@ export function Header() {
   } = useInvoiceStore();
 
   const [isDraftsOpen, setIsDraftsOpen] = useState(false);
+  const [confirmDialogState, setConfirmDialogState] = useState<{
+    isOpen: boolean;
+    title: string;
+    description: string;
+    type: "warning" | "danger" | "info";
+    confirmText: string;
+    onConfirm: () => void;
+  }>({
+    isOpen: false,
+    title: "",
+    description: "",
+    type: "warning",
+    confirmText: "Continue",
+    onConfirm: () => {},
+  });
+
+  const handleNewInvoiceClick = () => {
+    setConfirmDialogState({
+      isOpen: true,
+      title: "Start New Blank Invoice?",
+      description: "Any unsaved changes on the current invoice form will be replaced with a fresh template.",
+      type: "warning",
+      confirmText: "Start Fresh",
+      onConfirm: () => resetInvoice(),
+    });
+  };
+
+  const handleSampleDataClick = () => {
+    setConfirmDialogState({
+      isOpen: true,
+      title: "Load Sample Invoice Data?",
+      description: "This will populate the editor and live preview with pre-filled sample items and details.",
+      type: "info",
+      confirmText: "Load Sample",
+      onConfirm: () => loadSampleInvoice(),
+    });
+  };
 
   const themeOptions: { value: TemplateTheme; label: string; bg: string }[] = [
     { value: "indigo", label: "Indigo", bg: "bg-indigo-600" },
@@ -119,7 +157,7 @@ export function Header() {
           <Button
             size="sm"
             variant="outline"
-            onClick={loadSampleInvoice}
+            onClick={handleSampleDataClick}
             className="text-xs h-7 sm:h-8 px-2 sm:px-3"
             title="Load sample invoice with pre-filled items"
           >
@@ -132,7 +170,7 @@ export function Header() {
           <Button
             size="sm"
             variant="outline"
-            onClick={resetInvoice}
+            onClick={handleNewInvoiceClick}
             className="text-xs h-7 sm:h-8 px-2 sm:px-3"
             title="Start a blank invoice"
           >
@@ -174,6 +212,19 @@ export function Header() {
       <DraftsModal
         isOpen={isDraftsOpen}
         onClose={() => setIsDraftsOpen(false)}
+      />
+
+      {/* Professional Confirmation Dialog */}
+      <ConfirmDialog
+        isOpen={confirmDialogState.isOpen}
+        onClose={() =>
+          setConfirmDialogState((prev) => ({ ...prev, isOpen: false }))
+        }
+        onConfirm={confirmDialogState.onConfirm}
+        title={confirmDialogState.title}
+        description={confirmDialogState.description}
+        type={confirmDialogState.type}
+        confirmText={confirmDialogState.confirmText}
       />
     </header>
   );
