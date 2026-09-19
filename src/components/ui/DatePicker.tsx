@@ -44,8 +44,10 @@ export function DatePicker({
       defaultDate: value || undefined,
       minDate: minDate || undefined,
       maxDate: maxDate || undefined,
-      disableMobile: true, // Uses flatpickr's custom UI consistently
-      allowInput: true,
+      disableMobile: true,
+      allowInput: false,
+      monthSelectorType: "dropdown",
+      position: "auto",
       onChange: (_selectedDates, dateStr) => {
         onChange(dateStr);
       },
