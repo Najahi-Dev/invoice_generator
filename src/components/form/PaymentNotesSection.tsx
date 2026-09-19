@@ -3,7 +3,7 @@ import { useInvoiceStore } from "@/store/useInvoiceStore";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { Select } from "@/components/ui/Select";
-import { CreditCard, Landmark, FileCheck } from "lucide-react";
+import { Landmark, FileCheck } from "lucide-react";
 
 export function PaymentNotesSection() {
   const {
@@ -18,15 +18,15 @@ export function PaymentNotesSection() {
   return (
     <div className="space-y-4">
       {/* Payment Details Box */}
-      <div className="space-y-3">
+      <div className="space-y-3.5">
         <div className="flex items-center justify-between">
-          <label className="text-xs font-semibold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5">
+          <label className="text-[12px] font-semibold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5">
             <Landmark className="h-3.5 w-3.5 text-zinc-600" />
             Payment Instructions & Wire Details
           </label>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <Select
             label="Payment Method"
             value={paymentDetails.method}
@@ -86,7 +86,7 @@ export function PaymentNotesSection() {
 
         {paymentDetails.method === "bank_transfer" && (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <Input
                 label="Account Holder Name"
                 placeholder="Apex Engineering Labs Inc."
@@ -105,7 +105,7 @@ export function PaymentNotesSection() {
               />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <Input
                 label="Routing Number / Sort Code"
                 placeholder="121000358"
@@ -137,7 +137,7 @@ export function PaymentNotesSection() {
       </div>
 
       {/* Notes and Terms Area */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-2">
         <Textarea
           label="Notes to Client"
           placeholder="Thank you for your business! If you have any questions, feel free to reach out..."
@@ -157,11 +157,11 @@ export function PaymentNotesSection() {
 
       {/* Signature Section */}
       <div className="pt-2 border-t border-zinc-100">
-        <label className="text-xs font-semibold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5 mb-2">
+        <label className="text-[12px] font-semibold text-zinc-900 uppercase tracking-wider flex items-center gap-1.5 mb-2.5">
           <FileCheck className="h-3.5 w-3.5 text-zinc-600" />
           Authorized Signature
         </label>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           <Input
             label="Signer Full Name"
             placeholder="e.g. John Doe"

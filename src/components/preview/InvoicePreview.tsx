@@ -10,7 +10,7 @@ export function InvoicePreview() {
   const { invoice, previewZoom } = useInvoiceStore();
 
   return (
-    <div className="space-y-3 sticky top-16">
+    <div className="space-y-3 sticky top-14 sm:top-16">
       {/* Export Action Bar (prominently placed near the preview) */}
       <ExportButtons />
 
@@ -18,9 +18,9 @@ export function InvoicePreview() {
       <PreviewControls />
 
       {/* Preview Canvas Container */}
-      <div className="bg-zinc-100/70 border border-zinc-200/90 rounded-[6px] p-3 sm:p-5 overflow-auto flex justify-center max-h-[calc(100vh-210px)] min-h-[500px]">
+      <div className="bg-zinc-100/80 border border-zinc-200/90 rounded-[6px] p-2 sm:p-5 overflow-x-auto overflow-y-auto flex justify-center max-h-[calc(100vh-180px)] min-h-[400px] sm:min-h-[500px] shadow-2xs">
         <div
-          className="transition-transform duration-150 origin-top w-full max-w-[800px]"
+          className="transition-transform duration-150 origin-top w-full max-w-[800px] shrink-0"
           style={{
             transform: previewZoom !== 100 ? `scale(${previewZoom / 100})` : undefined,
             transformOrigin: "top center",
