@@ -50,8 +50,8 @@ export function DraftsModal({ isOpen, onClose }: DraftsModalProps) {
       maxWidth="lg"
     >
       <div className="space-y-4">
-        <div className="flex items-center justify-between pb-3 border-b border-zinc-100">
-          <div className="text-xs text-zinc-500">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-3 border-b border-zinc-100">
+          <div className="text-xs text-zinc-500 font-medium">
             {savedDrafts.length} {savedDrafts.length === 1 ? "draft" : "drafts"} saved
           </div>
           <div className="flex items-center gap-2">
@@ -59,7 +59,7 @@ export function DraftsModal({ isOpen, onClose }: DraftsModalProps) {
               size="sm"
               variant="outline"
               onClick={handleSaveCurrent}
-              className="text-xs"
+              className="text-xs h-8 px-2.5"
             >
               {savedNotice ? (
                 <>
@@ -69,7 +69,7 @@ export function DraftsModal({ isOpen, onClose }: DraftsModalProps) {
               ) : (
                 <>
                   <Download className="h-3.5 w-3.5" />
-                  Save Active Invoice
+                  Save Active
                 </>
               )}
             </Button>
@@ -80,7 +80,7 @@ export function DraftsModal({ isOpen, onClose }: DraftsModalProps) {
                 resetInvoice();
                 onClose();
               }}
-              className="text-xs"
+              className="text-xs h-8 px-2.5"
             >
               <Plus className="h-3.5 w-3.5" />
               New Invoice
@@ -106,18 +106,18 @@ export function DraftsModal({ isOpen, onClose }: DraftsModalProps) {
                 <div
                   key={draft.id}
                   onClick={() => handleLoad(draft.id)}
-                  className={`p-3 rounded-[4px] flex items-center justify-between transition-colors cursor-pointer hover:bg-zinc-50 ${
+                  className={`p-2.5 sm:p-3 rounded-[4px] flex items-center justify-between gap-2 transition-colors cursor-pointer hover:bg-zinc-50 ${
                     isActive ? "bg-zinc-100/70 border border-zinc-200" : ""
                   }`}
                 >
-                  <div className="flex items-center gap-3 min-w-0">
+                  <div className="flex items-center gap-2.5 min-w-0 flex-1">
                     <div className="h-8 w-8 rounded-[4px] bg-zinc-100 border border-zinc-200 flex items-center justify-center shrink-0 text-zinc-600 font-mono text-xs font-semibold">
                       {draft.metadata.currency}
                     </div>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-2">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-1.5 truncate">
                         <span className="font-semibold text-xs text-zinc-900 truncate">
-                          {draft.metadata.invoiceNumber || "Untitled Invoice"}
+                          {draft.metadata.invoiceNumber || "Untitled"}
                         </span>
                         {isActive && (
                           <Badge variant="default" size="sm">
@@ -126,14 +126,14 @@ export function DraftsModal({ isOpen, onClose }: DraftsModalProps) {
                         )}
                       </div>
                       <div className="text-[11px] text-zinc-500 truncate mt-0.5">
-                        {draft.recipient.companyName || draft.recipient.name || "No client specified"}
+                        {draft.recipient.companyName || draft.recipient.name || "No client"}
                         {" • "}
                         {draft.metadata.issueDate}
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 shrink-0 ml-4">
+                  <div className="flex items-center gap-2 shrink-0">
                     <div className="text-right">
                       <div className="text-xs font-semibold text-zinc-900 font-mono">
                         {formattedTotal}
@@ -145,7 +145,7 @@ export function DraftsModal({ isOpen, onClose }: DraftsModalProps) {
 
                     <button
                       onClick={(e) => handleDelete(e, draft.id)}
-                      className="p-1.5 text-zinc-400 hover:text-rose-600 hover:bg-rose-50 rounded-[4px] transition-colors"
+                      className="p-1.5 text-zinc-400 hover:text-rose-600 hover:bg-rose-50 rounded-[4px] transition-colors cursor-pointer"
                       title="Delete draft"
                       aria-label="Delete draft"
                     >
