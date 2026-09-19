@@ -15,13 +15,13 @@ export default function InvoiceWorkbenchPage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-100/50">
+    <div className="min-h-screen flex flex-col bg-slate-100/60">
       {/* Top Application Header */}
       <Header />
 
       {/* Main Workbench Body */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-6 lg:p-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <main className="flex-1 max-w-[1520px] w-full mx-auto p-4 sm:p-6 lg:p-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           {/* Left Column: Form Editor (Visible on desktop or when activeTab === 'editor' on mobile) */}
           <div
             className={`lg:col-span-6 xl:col-span-5 ${

@@ -13,11 +13,11 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const textareaId = id || (label ? label.toLowerCase().replace(/\s+/g, "-") : undefined);
 
     return (
-      <div className="w-full flex flex-col gap-1">
+      <div className="w-full flex flex-col gap-1.5">
         {label && (
           <label
             htmlFor={textareaId}
-            className="text-xs font-medium text-zinc-700 select-none"
+            className="text-[12px] font-medium text-zinc-700 select-none"
           >
             {label}
           </label>
@@ -26,8 +26,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           id={textareaId}
           ref={ref}
           className={cn(
-            "w-full text-xs sm:text-sm bg-white text-zinc-900 placeholder:text-zinc-400 border rounded-[4px] p-2.5 transition-all outline-none resize-y min-h-[70px]",
-            "border-zinc-300 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900",
+            "w-full text-[13px] bg-white text-zinc-900 placeholder:text-zinc-400 border rounded-[4px] p-3 transition-all outline-none resize-y min-h-[75px] shadow-2xs leading-relaxed",
+            "border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900",
             "disabled:bg-zinc-50 disabled:text-zinc-400 disabled:cursor-not-allowed",
             error && "border-rose-500 focus:border-rose-500 focus:ring-rose-500",
             className

@@ -8,8 +8,8 @@ export function RecipientSection() {
   const { recipient } = invoice;
 
   return (
-    <div className="space-y-3">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+    <div className="space-y-3.5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <Input
           label="Client Name / Contact Person"
           placeholder="e.g. Jane Doe"
@@ -26,7 +26,7 @@ export function RecipientSection() {
         />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <Input
           label="Client Email"
           type="email"
@@ -51,7 +51,7 @@ export function RecipientSection() {
         onChange={(e) => updateRecipient({ address: e.target.value })}
       />
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
         <div className="col-span-1 sm:col-span-2">
           <Input
             label="City"
@@ -78,7 +78,7 @@ export function RecipientSection() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <Input
           label="Country"
           placeholder="United States"

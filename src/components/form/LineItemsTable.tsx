@@ -2,7 +2,7 @@ import React from "react";
 import { useInvoiceStore } from "@/store/useInvoiceStore";
 import { formatCurrency } from "@/lib/utils/currency";
 import { Button } from "@/components/ui/Button";
-import { Plus, Trash2, Copy, Percent, Layers } from "lucide-react";
+import { Plus, Trash2, Copy, Percent } from "lucide-react";
 import { LineItem } from "@/types/invoice";
 
 export function LineItemsTable() {
@@ -29,24 +29,24 @@ export function LineItemsTable() {
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3.5">
       {/* Header with Tax mode toggle */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-semibold text-zinc-900 uppercase tracking-wider">
-            Items & Services ({items.length})
+          <span className="text-[12px] font-semibold text-zinc-900 uppercase tracking-wider">
+            Line Items ({items.length})
           </span>
         </div>
 
         <div className="flex items-center gap-1.5 text-xs">
-          <span className="text-zinc-500 hidden sm:inline">Tax Mode:</span>
+          <span className="text-zinc-400 text-[11px] hidden sm:inline">Tax Mode:</span>
           <button
             type="button"
             onClick={() => setTaxMode(isItemTax ? "global" : "item")}
-            className={`px-2 py-0.5 text-xs rounded-[3px] border transition-colors flex items-center gap-1 cursor-pointer ${
+            className={`px-2.5 py-1 text-xs rounded-[4px] border transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs font-medium ${
               isItemTax
                 ? "bg-zinc-900 text-white border-zinc-900"
-                : "bg-white text-zinc-700 border-zinc-300 hover:bg-zinc-50"
+                : "bg-white text-zinc-700 border-zinc-200 hover:bg-zinc-50 hover:border-zinc-300"
             }`}
           >
             <Percent className="h-3 w-3" />
@@ -56,15 +56,15 @@ export function LineItemsTable() {
       </div>
 
       {/* Line Items List */}
-      <div className="space-y-2.5">
+      <div className="space-y-3">
         {items.map((item, index) => (
           <div
             key={item.id}
-            className="p-3 bg-zinc-50/80 border border-zinc-200/90 rounded-[4px] space-y-2 transition-all hover:border-zinc-300"
+            className="p-3.5 bg-zinc-50/70 border border-zinc-200/90 rounded-[4px] space-y-2.5 transition-all hover:border-zinc-300 shadow-2xs"
           >
             {/* Top row: Item description & action buttons */}
-            <div className="flex items-start gap-2">
-              <span className="text-xs font-mono font-medium text-zinc-400 mt-2 shrink-0 w-4 text-center">
+            <div className="flex items-start gap-2.5">
+              <span className="text-xs font-mono font-medium text-zinc-400 mt-2 shrink-0 w-4 text-center select-none">
                 {index + 1}
               </span>
               <div className="flex-1 space-y-1.5">
@@ -75,7 +75,7 @@ export function LineItemsTable() {
                   onChange={(e) =>
                     updateLineItem(item.id, { description: e.target.value })
                   }
-                  className="w-full text-xs sm:text-sm font-medium bg-white text-zinc-900 placeholder:text-zinc-400 border border-zinc-300 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 rounded-[4px] px-2.5 py-1.5 outline-none"
+                  className="w-full h-8 text-[13px] font-medium bg-white text-zinc-900 placeholder:text-zinc-400 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 rounded-[4px] px-3 outline-none transition-all shadow-2xs"
                 />
                 <input
                   type="text"
@@ -84,7 +84,7 @@ export function LineItemsTable() {
                   onChange={(e) =>
                     updateLineItem(item.id, { details: e.target.value })
                   }
-                  className="w-full text-xs bg-white text-zinc-600 placeholder:text-zinc-400 border border-zinc-200 focus:border-zinc-900 rounded-[4px] px-2.5 py-1 outline-none"
+                  className="w-full h-7 text-xs bg-white text-zinc-600 placeholder:text-zinc-400 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 rounded-[4px] px-3 outline-none transition-all shadow-2xs"
                 />
               </div>
 
@@ -93,7 +93,7 @@ export function LineItemsTable() {
                 <button
                   type="button"
                   onClick={() => duplicateLineItem(item.id)}
-                  className="p-1 text-zinc-400 hover:text-zinc-700 hover:bg-zinc-200/60 rounded-[3px] transition-colors"
+                  className="p-1.5 text-zinc-400 hover:text-zinc-800 hover:bg-zinc-200/70 rounded-[3px] transition-colors cursor-pointer"
                   title="Duplicate row"
                   aria-label="Duplicate row"
                 >
@@ -103,7 +103,7 @@ export function LineItemsTable() {
                   type="button"
                   onClick={() => removeLineItem(item.id)}
                   disabled={items.length <= 1}
-                  className="p-1 text-zinc-400 hover:text-rose-600 hover:bg-rose-50 rounded-[3px] disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-zinc-400 transition-colors"
+                  className="p-1.5 text-zinc-400 hover:text-rose-600 hover:bg-rose-50 rounded-[3px] disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-zinc-400 transition-colors cursor-pointer"
                   title="Remove item"
                   aria-label="Remove item"
                 >
@@ -113,10 +113,10 @@ export function LineItemsTable() {
             </div>
 
             {/* Bottom row: Quantity, Rate, Discount, Tax, and Row Total */}
-            <div className="grid grid-cols-2 sm:grid-cols-12 gap-2 pt-1 border-t border-zinc-200/60 items-center">
+            <div className="grid grid-cols-2 sm:grid-cols-12 gap-2.5 pt-2 border-t border-zinc-200/70 items-center">
               {/* Quantity */}
               <div className="col-span-1 sm:col-span-3">
-                <label className="text-[10px] uppercase font-semibold text-zinc-500 block mb-0.5">
+                <label className="text-[10px] uppercase font-semibold text-zinc-500 block mb-1">
                   Qty
                 </label>
                 <input
@@ -127,13 +127,13 @@ export function LineItemsTable() {
                   onChange={(e) =>
                     handleNumericChange(item.id, "quantity", e.target.value)
                   }
-                  className="w-full h-8 text-xs bg-white text-zinc-900 border border-zinc-300 focus:border-zinc-900 rounded-[4px] px-2 text-right outline-none font-mono"
+                  className="w-full h-8 text-xs bg-white text-zinc-900 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 rounded-[4px] px-2.5 text-right outline-none font-mono shadow-2xs"
                 />
               </div>
 
               {/* Unit Price */}
               <div className="col-span-1 sm:col-span-3">
-                <label className="text-[10px] uppercase font-semibold text-zinc-500 block mb-0.5">
+                <label className="text-[10px] uppercase font-semibold text-zinc-500 block mb-1">
                   Unit Price
                 </label>
                 <input
@@ -144,14 +144,14 @@ export function LineItemsTable() {
                   onChange={(e) =>
                     handleNumericChange(item.id, "unitPrice", e.target.value)
                   }
-                  className="w-full h-8 text-xs bg-white text-zinc-900 border border-zinc-300 focus:border-zinc-900 rounded-[4px] px-2 text-right outline-none font-mono"
+                  className="w-full h-8 text-xs bg-white text-zinc-900 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 rounded-[4px] px-2.5 text-right outline-none font-mono shadow-2xs"
                 />
               </div>
 
               {/* Optional Item Tax */}
               {isItemTax && (
                 <div className="col-span-1 sm:col-span-2">
-                  <label className="text-[10px] uppercase font-semibold text-zinc-500 block mb-0.5">
+                  <label className="text-[10px] uppercase font-semibold text-zinc-500 block mb-1">
                     Tax (%)
                   </label>
                   <input
@@ -164,7 +164,7 @@ export function LineItemsTable() {
                     onChange={(e) =>
                       handleNumericChange(item.id, "taxRate", e.target.value)
                     }
-                    className="w-full h-8 text-xs bg-white text-zinc-900 border border-zinc-300 focus:border-zinc-900 rounded-[4px] px-2 text-right outline-none font-mono"
+                    className="w-full h-8 text-xs bg-white text-zinc-900 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 rounded-[4px] px-2.5 text-right outline-none font-mono shadow-2xs"
                   />
                 </div>
               )}
@@ -175,10 +175,10 @@ export function LineItemsTable() {
                   isItemTax ? "sm:col-span-4" : "sm:col-span-6"
                 } text-right`}
               >
-                <label className="text-[10px] uppercase font-semibold text-zinc-500 block mb-0.5">
+                <label className="text-[10px] uppercase font-semibold text-zinc-500 block mb-1">
                   Line Total
                 </label>
-                <div className="h-8 flex items-center justify-end font-semibold text-xs text-zinc-900 font-mono bg-zinc-100/70 border border-zinc-200/80 rounded-[4px] px-2">
+                <div className="h-8 flex items-center justify-end font-semibold text-xs text-zinc-900 font-mono bg-zinc-100/90 border border-zinc-200/90 rounded-[4px] px-3 shadow-2xs">
                   {formatCurrency(item.total, metadata.currency)}
                 </div>
               </div>
@@ -193,7 +193,7 @@ export function LineItemsTable() {
         variant="outline"
         size="sm"
         onClick={() => addLineItem()}
-        className="w-full border-dashed border-zinc-300 hover:border-zinc-500 hover:bg-zinc-50 text-xs py-2"
+        className="w-full border-dashed border-zinc-300 hover:border-zinc-500 hover:bg-zinc-50 text-xs py-2 h-9 font-medium"
       >
         <Plus className="h-3.5 w-3.5" />
         Add Line Item

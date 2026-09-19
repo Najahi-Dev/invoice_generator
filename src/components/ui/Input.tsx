@@ -27,18 +27,18 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const inputId = id || (label ? label.toLowerCase().replace(/\s+/g, "-") : undefined);
 
     return (
-      <div className="w-full flex flex-col gap-1">
+      <div className="w-full flex flex-col gap-1.5">
         {label && (
           <label
             htmlFor={inputId}
-            className="text-xs font-medium text-zinc-700 select-none flex items-center justify-between"
+            className="text-[12px] font-medium text-zinc-700 select-none flex items-center justify-between"
           >
             <span>{label}</span>
           </label>
         )}
         <div className="relative flex items-center w-full">
           {prefixElement && (
-            <div className="absolute left-2.5 flex items-center pointer-events-none text-zinc-400 text-xs font-medium z-10">
+            <div className="absolute left-3 flex items-center pointer-events-none text-zinc-400 text-xs font-medium z-10">
               {prefixElement}
             </div>
           )}
@@ -46,18 +46,18 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             id={inputId}
             ref={ref}
             className={cn(
-              "w-full h-8 sm:h-9 text-xs sm:text-sm bg-white text-zinc-900 placeholder:text-zinc-400 border rounded-[4px] px-2.5 transition-all outline-none",
-              "border-zinc-300 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900",
+              "w-full h-9 text-[13px] bg-white text-zinc-900 placeholder:text-zinc-400 border rounded-[4px] px-3 transition-all outline-none shadow-2xs",
+              "border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900",
               "disabled:bg-zinc-50 disabled:text-zinc-400 disabled:cursor-not-allowed",
-              prefixElement && "pl-7 sm:pl-8",
-              suffixElement && "pr-7 sm:pr-8",
+              prefixElement && "pl-8 sm:pl-9",
+              suffixElement && "pr-8 sm:pr-9",
               error && "border-rose-500 focus:border-rose-500 focus:ring-rose-500",
               className
             )}
             {...props}
           />
           {suffixElement && (
-            <div className="absolute right-2.5 flex items-center pointer-events-none text-zinc-400 text-xs font-medium z-10">
+            <div className="absolute right-3 flex items-center pointer-events-none text-zinc-400 text-xs font-medium z-10">
               {suffixElement}
             </div>
           )}

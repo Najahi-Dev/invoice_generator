@@ -37,18 +37,18 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const selectId = id || (label ? label.toLowerCase().replace(/\s+/g, "-") : undefined);
 
     return (
-      <div className="w-full flex flex-col gap-1">
+      <div className="w-full flex flex-col gap-1.5">
         {label && (
           <label
             htmlFor={selectId}
-            className="text-xs font-medium text-zinc-700 select-none"
+            className="text-[12px] font-medium text-zinc-700 select-none flex items-center justify-between"
           >
-            {label}
+            <span>{label}</span>
           </label>
         )}
         <div className="relative flex items-center w-full">
           {prefixElement && (
-            <div className="absolute left-2.5 flex items-center pointer-events-none text-zinc-400 text-xs font-medium z-10">
+            <div className="absolute left-3 flex items-center pointer-events-none text-zinc-400 text-xs font-medium z-10">
               {prefixElement}
             </div>
           )}
@@ -56,10 +56,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             id={selectId}
             ref={ref}
             className={cn(
-              "w-full h-8 sm:h-9 text-xs sm:text-sm bg-white text-zinc-900 border rounded-[4px] pl-2.5 pr-8 transition-all outline-none appearance-none cursor-pointer",
-              "border-zinc-300 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900",
+              "w-full h-9 text-[13px] bg-white text-zinc-900 border rounded-[4px] pl-3 pr-9 transition-all outline-none appearance-none cursor-pointer shadow-2xs",
+              "border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900",
               "disabled:bg-zinc-50 disabled:text-zinc-400 disabled:cursor-not-allowed",
-              prefixElement && "pl-7 sm:pl-8",
+              prefixElement && "pl-8 sm:pl-9",
               error && "border-rose-500 focus:border-rose-500 focus:ring-rose-500",
               className
             )}
@@ -78,11 +78,11 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               : children}
           </select>
           {suffixElement ? (
-            <div className="absolute right-2.5 flex items-center pointer-events-none text-zinc-400 text-xs font-medium z-10">
+            <div className="absolute right-3 flex items-center pointer-events-none text-zinc-400 text-xs font-medium z-10">
               {suffixElement}
             </div>
           ) : (
-            <ChevronDown className="absolute right-2.5 h-4 w-4 pointer-events-none text-zinc-500" />
+            <ChevronDown className="absolute right-3 h-4 w-4 pointer-events-none text-zinc-400" />
           )}
         </div>
         {error ? (

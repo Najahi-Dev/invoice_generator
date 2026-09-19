@@ -9,7 +9,7 @@ export function Card({
   return (
     <div
       className={cn(
-        "bg-white border border-zinc-200/90 rounded-[6px] shadow-xs overflow-hidden",
+        "bg-white border border-zinc-200/80 rounded-[6px] shadow-xs overflow-hidden transition-all",
         className
       )}
       {...props}
@@ -27,7 +27,7 @@ export function CardHeader({
   return (
     <div
       className={cn(
-        "px-4 sm:px-5 py-3.5 border-b border-zinc-100 flex items-center justify-between",
+        "px-4 sm:px-5 py-3.5 border-b border-zinc-100 flex items-center justify-between bg-white",
         className
       )}
       {...props}
@@ -45,7 +45,7 @@ export function CardTitle({
   return (
     <h3
       className={cn(
-        "text-sm font-semibold text-zinc-900 tracking-tight flex items-center gap-2",
+        "text-[13px] font-semibold text-zinc-900 tracking-tight flex items-center gap-2",
         className
       )}
       {...props}

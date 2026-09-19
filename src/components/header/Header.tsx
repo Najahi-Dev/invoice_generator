@@ -45,11 +45,11 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-zinc-200/80 px-4 sm:px-6 py-2.5 print:hidden">
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
+      <div className="max-w-[1520px] mx-auto flex items-center justify-between gap-4">
         {/* Left: Brand Identity & Active File Status */}
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2">
-            <div className="h-7 w-7 rounded-[4px] bg-zinc-900 text-white flex items-center justify-center font-bold text-xs tracking-wider shadow-xs">
+          <div className="flex items-center gap-2.5">
+            <div className="h-8 w-8 rounded-[4px] bg-zinc-950 text-white flex items-center justify-center font-bold text-xs tracking-wider shadow-xs border border-zinc-800">
               <FileText className="h-4 w-4 text-zinc-100" />
             </div>
             <div className="flex flex-col">
@@ -57,8 +57,8 @@ export function Header() {
                 <span className="font-semibold text-xs sm:text-sm text-zinc-900 tracking-tight">
                   Global Invoice Generator
                 </span>
-                <span className="hidden md:inline-flex items-center text-[10px] uppercase font-mono px-1.5 py-0.5 bg-zinc-100 text-zinc-600 rounded-[3px] border border-zinc-200">
-                  v1.0 Pro
+                <span className="hidden md:inline-flex items-center text-[10px] uppercase font-mono px-1.5 py-0.5 bg-zinc-100 text-zinc-600 rounded-[3px] border border-zinc-200 font-medium">
+                  SaaS Pro
                 </span>
               </div>
             </div>
@@ -69,7 +69,7 @@ export function Header() {
         <div className="flex lg:hidden items-center bg-zinc-100 p-0.5 rounded-[4px] border border-zinc-200">
           <button
             onClick={() => setActiveTab("editor")}
-            className={`flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-[3px] transition-colors ${
+            className={`flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-[3px] transition-all ${
               activeTab === "editor"
                 ? "bg-white text-zinc-900 shadow-xs"
                 : "text-zinc-600 hover:text-zinc-900"
@@ -80,7 +80,7 @@ export function Header() {
           </button>
           <button
             onClick={() => setActiveTab("preview")}
-            className={`flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-[3px] transition-colors ${
+            className={`flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-[3px] transition-all ${
               activeTab === "preview"
                 ? "bg-white text-zinc-900 shadow-xs"
                 : "text-zinc-600 hover:text-zinc-900"
@@ -92,23 +92,25 @@ export function Header() {
         </div>
 
         {/* Right: Actions Bar */}
-        <div className="flex items-center gap-1.5 sm:gap-2">
+        <div className="flex items-center gap-2">
           {/* Theme switcher */}
-          <div className="hidden sm:flex items-center gap-1 bg-zinc-50 border border-zinc-200 p-1 rounded-[4px]">
-            <Layers className="h-3.5 w-3.5 text-zinc-400 ml-1 mr-0.5" />
-            {themeOptions.map((opt) => (
-              <button
-                key={opt.value}
-                onClick={() => setTheme(opt.value)}
-                className={`h-4 w-4 rounded-[2px] transition-all ${opt.bg} ${
-                  invoice.theme === opt.value
-                    ? "ring-2 ring-zinc-900 ring-offset-1 scale-110"
-                    : "opacity-60 hover:opacity-100"
-                }`}
-                title={`Theme: ${opt.label}`}
-                aria-label={`Theme: ${opt.label}`}
-              />
-            ))}
+          <div className="hidden sm:flex items-center gap-1.5 bg-zinc-50 border border-zinc-200/90 px-2 py-1 rounded-[4px] shadow-2xs">
+            <Layers className="h-3.5 w-3.5 text-zinc-400" />
+            <div className="flex items-center gap-1">
+              {themeOptions.map((opt) => (
+                <button
+                  key={opt.value}
+                  onClick={() => setTheme(opt.value)}
+                  className={`h-4 w-4 rounded-[2px] transition-all cursor-pointer ${opt.bg} ${
+                    invoice.theme === opt.value
+                      ? "ring-2 ring-zinc-900 ring-offset-1 scale-110"
+                      : "opacity-50 hover:opacity-100"
+                  }`}
+                  title={`Theme: ${opt.label}`}
+                  aria-label={`Theme: ${opt.label}`}
+                />
+              ))}
+            </div>
           </div>
 
           {/* Load Sample Demo */}
@@ -116,7 +118,7 @@ export function Header() {
             size="sm"
             variant="outline"
             onClick={loadSampleInvoice}
-            className="hidden sm:inline-flex text-xs"
+            className="hidden sm:inline-flex text-xs h-8"
             title="Load sample invoice with pre-filled items"
           >
             <Sparkles className="h-3.5 w-3.5 text-amber-600" />
@@ -129,11 +131,12 @@ export function Header() {
             size="sm"
             variant="outline"
             onClick={resetInvoice}
-            className="text-xs"
+            className="text-xs h-8"
             title="Start a blank invoice"
           >
             <Plus className="h-3.5 w-3.5" />
-            <span className="hidden md:inline">New</span>
+            <span className="hidden md:inline">New Invoice</span>
+            <span className="md:hidden">New</span>
           </Button>
 
           {/* Saved Drafts */}
@@ -141,7 +144,7 @@ export function Header() {
             size="sm"
             variant="outline"
             onClick={() => setIsDraftsOpen(true)}
-            className="text-xs relative"
+            className="text-xs h-8 relative"
             title="Open saved drafts"
           >
             <FolderOpen className="h-3.5 w-3.5 text-zinc-600" />
@@ -158,7 +161,7 @@ export function Header() {
             size="sm"
             variant="secondary"
             onClick={handlePrint}
-            className="text-xs"
+            className="text-xs h-8"
             title="Print or Save via Browser Print"
           >
             <Printer className="h-3.5 w-3.5" />

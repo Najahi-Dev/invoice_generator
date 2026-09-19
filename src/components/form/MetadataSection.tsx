@@ -5,7 +5,6 @@ import { Select } from "@/components/ui/Select";
 import { CURRENCY_LIST } from "@/lib/utils/currency";
 import { CurrencyCode, PaymentTerms } from "@/types/invoice";
 import { RefreshCw, Calendar, Hash, DollarSign } from "lucide-react";
-import { Button } from "@/components/ui/Button";
 
 export function MetadataSection() {
   const {
@@ -29,9 +28,9 @@ export function MetadataSection() {
   ];
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3.5">
       {/* Title & Currency Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <Input
           label="Document Title"
           placeholder="TAX INVOICE / INVOICE"
@@ -56,14 +55,14 @@ export function MetadataSection() {
       </div>
 
       {/* Invoice # & PO # */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div>
-          <label className="text-xs font-medium text-zinc-700 select-none flex items-center justify-between mb-1">
+          <label className="text-[12px] font-medium text-zinc-700 select-none flex items-center justify-between mb-1.5">
             <span>Invoice Number</span>
             <button
               type="button"
               onClick={generateNewInvoiceNumber}
-              className="text-[11px] text-zinc-500 hover:text-zinc-900 flex items-center gap-1 font-normal cursor-pointer"
+              className="text-[11px] text-zinc-500 hover:text-zinc-950 flex items-center gap-1 font-normal cursor-pointer transition-colors"
               title="Generate new invoice number"
             >
               <RefreshCw className="h-3 w-3" /> Auto-gen
@@ -86,7 +85,7 @@ export function MetadataSection() {
       </div>
 
       {/* Dates and Terms */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
         <Input
           label="Issue Date"
           type="date"
