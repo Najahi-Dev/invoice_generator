@@ -60,7 +60,7 @@ export function SummarySection() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto">
             <input
               type="number"
               min="0"
@@ -73,9 +73,9 @@ export function SummarySection() {
                   parseFloat(e.target.value) || 0
                 )
               }
-              className="w-20 h-7 text-xs bg-white text-zinc-900 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 rounded-[3px] px-2 text-right outline-none font-mono shadow-2xs"
+              className="w-24 sm:w-20 h-8 sm:h-7 text-xs bg-white text-zinc-900 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 rounded-[3px] px-2 text-right outline-none font-mono shadow-2xs"
             />
-            <span className="font-semibold text-zinc-700 font-mono w-28 text-right">
+            <span className="font-semibold text-zinc-700 font-mono min-w-[80px] sm:w-28 text-right">
               -{formatCurrency(summary.discountAmount, metadata.currency)}
             </span>
           </div>
@@ -87,7 +87,7 @@ export function SummarySection() {
             <div className="flex items-center gap-1.5">
               <span className="text-zinc-600 font-medium">Tax Rate (%)</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto">
               <input
                 type="number"
                 min="0"
@@ -98,9 +98,9 @@ export function SummarySection() {
                 onChange={(e) =>
                   setGlobalTaxRate(parseFloat(e.target.value) || 0)
                 }
-                className="w-20 h-7 text-xs bg-white text-zinc-900 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 rounded-[3px] px-2 text-right outline-none font-mono shadow-2xs"
+                className="w-24 sm:w-20 h-8 sm:h-7 text-xs bg-white text-zinc-900 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 rounded-[3px] px-2 text-right outline-none font-mono shadow-2xs"
               />
-              <span className="font-semibold text-zinc-700 font-mono w-28 text-right">
+              <span className="font-semibold text-zinc-700 font-mono min-w-[80px] sm:w-28 text-right">
                 {formatCurrency(summary.taxAmount, metadata.currency)}
               </span>
             </div>
@@ -117,7 +117,7 @@ export function SummarySection() {
         {/* Shipping / Extra Fees */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 py-1.5 border-t border-zinc-200/60">
           <span className="text-zinc-600 font-medium">Shipping / Extra Fee</span>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto">
             <input
               type="number"
               min="0"
@@ -127,9 +127,9 @@ export function SummarySection() {
               onChange={(e) =>
                 setShippingFee(parseFloat(e.target.value) || 0)
               }
-              className="w-20 h-7 text-xs bg-white text-zinc-900 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 rounded-[3px] px-2 text-right outline-none font-mono shadow-2xs"
+              className="w-24 sm:w-20 h-8 sm:h-7 text-xs bg-white text-zinc-900 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 rounded-[3px] px-2 text-right outline-none font-mono shadow-2xs"
             />
-            <span className="font-semibold text-zinc-700 font-mono w-28 text-right">
+            <span className="font-semibold text-zinc-700 font-mono min-w-[80px] sm:w-28 text-right">
               {formatCurrency(summary.shippingFee, metadata.currency)}
             </span>
           </div>
@@ -145,13 +145,13 @@ export function SummarySection() {
 
         {/* Amount Paid & Balance Due */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 py-1.5 border-t border-zinc-200/60">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between sm:justify-start gap-2">
             <span className="text-zinc-600 font-medium">Amount Already Paid</span>
             <div className="inline-flex items-center gap-1">
               <button
                 type="button"
                 onClick={() => setAmountPaid(summary.grandTotal)}
-                className="text-[10px] font-medium text-zinc-700 hover:text-zinc-950 px-1.5 py-0.5 rounded-[2px] bg-zinc-200/80 hover:bg-zinc-200 transition-colors cursor-pointer"
+                className="text-[10px] font-medium text-zinc-700 hover:text-zinc-950 px-2 py-1 rounded-[2px] bg-zinc-200/80 hover:bg-zinc-200 transition-colors cursor-pointer"
                 title="Mark full invoice amount as paid"
               >
                 Paid in Full
@@ -160,7 +160,7 @@ export function SummarySection() {
                 <button
                   type="button"
                   onClick={() => setAmountPaid(0)}
-                  className="text-[10px] font-medium text-rose-600 hover:text-rose-800 px-1.5 py-0.5 rounded-[2px] bg-rose-50 hover:bg-rose-100 transition-colors cursor-pointer"
+                  className="text-[10px] font-medium text-rose-600 hover:text-rose-800 px-2 py-1 rounded-[2px] bg-rose-50 hover:bg-rose-100 transition-colors cursor-pointer"
                   title="Clear amount paid"
                 >
                   Clear
@@ -168,7 +168,7 @@ export function SummarySection() {
               )}
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto">
             <input
               type="number"
               min="0"
@@ -178,9 +178,9 @@ export function SummarySection() {
               onChange={(e) =>
                 setAmountPaid(parseFloat(e.target.value) || 0)
               }
-              className="w-20 h-7 text-xs bg-white text-zinc-900 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 rounded-[3px] px-2 text-right outline-none font-mono shadow-2xs"
+              className="w-24 sm:w-20 h-8 sm:h-7 text-xs bg-white text-zinc-900 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 rounded-[3px] px-2 text-right outline-none font-mono shadow-2xs"
             />
-            <span className="font-semibold text-emerald-700 font-mono w-28 text-right">
+            <span className="font-semibold text-emerald-700 font-mono min-w-[80px] sm:w-28 text-right">
               {formatCurrency(summary.amountPaid, metadata.currency)}
             </span>
           </div>

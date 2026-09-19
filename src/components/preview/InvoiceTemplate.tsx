@@ -109,18 +109,18 @@ export function InvoiceTemplate({
   return (
     <div
       id={id}
-      className="w-full bg-white text-zinc-900 mx-auto shadow-sm border border-zinc-200/80 rounded-[4px] p-6 sm:p-10 font-sans print:border-none print:shadow-none print:p-0 print:m-0 print:w-full select-text transition-all min-h-[842px] flex flex-col justify-between"
+      className="w-full bg-white text-zinc-900 mx-auto shadow-sm border border-zinc-200/80 rounded-[4px] p-4 sm:p-8 md:p-10 font-sans print:border-none print:shadow-none print:p-0 print:m-0 print:w-full select-text transition-all min-h-[842px] flex flex-col justify-between"
       style={{
         boxSizing: "border-box",
       }}
     >
       <div>
         {/* Top Header Row: Logo & Invoice Title */}
-        <div className="flex items-start justify-between gap-6 pb-6 border-b border-zinc-200">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 sm:gap-6 pb-4 sm:pb-6 border-b border-zinc-200">
           {/* Sender Logo or Name */}
           <div className="flex items-center gap-3.5">
             {sender.logoUrl ? (
-              <div className="h-14 w-14 max-h-16 max-w-28 flex items-center justify-start overflow-hidden">
+              <div className="h-12 w-12 sm:h-14 sm:w-14 max-h-16 max-w-28 flex items-center justify-start overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={sender.logoUrl}
@@ -129,12 +129,12 @@ export function InvoiceTemplate({
                 />
               </div>
             ) : null}
-            <div>
-              <h1 className="text-lg font-bold text-zinc-900 tracking-tight leading-tight">
+            <div className="min-w-0">
+              <h1 className="text-base sm:text-lg font-bold text-zinc-900 tracking-tight leading-tight break-words">
                 {sender.name || "Your Business Name"}
               </h1>
               {sender.taxId && (
-                <p className="text-[11px] text-zinc-500 font-mono mt-0.5">
+                <p className="text-[11px] text-zinc-500 font-mono mt-0.5 break-words">
                   Tax ID / VAT: {sender.taxId}
                 </p>
               )}
@@ -142,11 +142,11 @@ export function InvoiceTemplate({
           </div>
 
           {/* Invoice Title & Meta summary */}
-          <div className="text-right">
-            <h2 className="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight text-zinc-900">
+          <div className="text-left sm:text-right">
+            <h2 className="text-xl sm:text-3xl font-extrabold uppercase tracking-tight text-zinc-900">
               {title || "INVOICE"}
             </h2>
-            <div className="mt-1.5 inline-flex items-center gap-2">
+            <div className="mt-1 inline-flex items-center gap-2">
               <span className="text-xs font-mono text-zinc-500 font-medium">
                 #{metadata.invoiceNumber || "INV-0001"}
               </span>
@@ -155,7 +155,7 @@ export function InvoiceTemplate({
         </div>
 
         {/* Sender & Recipient Columns + Dates Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 py-6 border-b border-zinc-200 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 py-4 sm:py-6 border-b border-zinc-200 text-xs">
           {/* Sender Details */}
           <div className="sm:col-span-4 space-y-1">
             <div className="font-semibold text-[11px] uppercase tracking-wider text-zinc-400 mb-1">
@@ -257,9 +257,9 @@ export function InvoiceTemplate({
         </div>
 
         {/* Line Items Table */}
-        <div className="py-6">
+        <div className="py-4 sm:py-6">
           <div className="w-full overflow-x-auto">
-            <table className="w-full text-left text-xs border-collapse">
+            <table className="w-full min-w-[480px] text-left text-xs border-collapse">
               <thead>
                 <tr className={`${currentTheme.tableHeaderBg} text-white font-semibold rounded-[3px]`}>
                   <th className="py-2.5 px-3 rounded-l-[3px] w-8 text-center font-mono">

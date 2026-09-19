@@ -60,14 +60,14 @@ export function LineItemsTable() {
         {items.map((item, index) => (
           <div
             key={item.id}
-            className="p-3.5 bg-zinc-50/70 border border-zinc-200/90 rounded-[4px] space-y-2.5 transition-all hover:border-zinc-300 shadow-2xs"
+            className="p-3 sm:p-3.5 bg-zinc-50/80 border border-zinc-200/90 rounded-[4px] space-y-3 transition-all hover:border-zinc-300 shadow-2xs"
           >
             {/* Top row: Item description & action buttons */}
-            <div className="flex items-start gap-2.5">
-              <span className="text-xs font-mono font-medium text-zinc-400 mt-2 shrink-0 w-4 text-center select-none">
+            <div className="flex items-start gap-2 sm:gap-2.5">
+              <span className="text-xs font-mono font-semibold text-zinc-400 mt-2 shrink-0 w-4 text-center select-none">
                 {index + 1}
               </span>
-              <div className="flex-1 space-y-1.5">
+              <div className="flex-1 space-y-1.5 min-w-0">
                 <input
                   type="text"
                   placeholder="Item or service description *"
@@ -75,45 +75,45 @@ export function LineItemsTable() {
                   onChange={(e) =>
                     updateLineItem(item.id, { description: e.target.value })
                   }
-                  className="w-full h-8 text-[13px] font-medium bg-white text-zinc-900 placeholder:text-zinc-400 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 rounded-[4px] px-3 outline-none transition-all shadow-2xs"
+                  className="w-full h-9 text-xs sm:text-[13px] font-medium bg-white text-zinc-900 placeholder:text-zinc-400 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 rounded-[4px] px-3 outline-none transition-all shadow-2xs"
                 />
                 <input
                   type="text"
-                  placeholder="Additional details / specifications (Optional)"
+                  placeholder="Additional details / specs (Optional)"
                   value={item.details || ""}
                   onChange={(e) =>
                     updateLineItem(item.id, { details: e.target.value })
                   }
-                  className="w-full h-7 text-xs bg-white text-zinc-600 placeholder:text-zinc-400 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 rounded-[4px] px-3 outline-none transition-all shadow-2xs"
+                  className="w-full h-8 text-[11px] sm:text-xs bg-white text-zinc-600 placeholder:text-zinc-400 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 rounded-[4px] px-3 outline-none transition-all shadow-2xs"
                 />
               </div>
 
-              {/* Action buttons */}
-              <div className="flex items-center gap-1 shrink-0 pt-0.5">
+              {/* Action buttons with proper mobile touch targets */}
+              <div className="flex items-center gap-0.5 sm:gap-1 shrink-0 pt-0.5">
                 <button
                   type="button"
                   onClick={() => duplicateLineItem(item.id)}
-                  className="p-1.5 text-zinc-400 hover:text-zinc-800 hover:bg-zinc-200/70 rounded-[3px] transition-colors cursor-pointer"
+                  className="h-8 w-8 flex items-center justify-center text-zinc-400 hover:text-zinc-800 hover:bg-zinc-200/70 rounded-[4px] transition-colors cursor-pointer"
                   title="Duplicate row"
                   aria-label="Duplicate row"
                 >
-                  <Copy className="h-3.5 w-3.5" />
+                  <Copy className="h-4 w-4" />
                 </button>
                 <button
                   type="button"
                   onClick={() => removeLineItem(item.id)}
                   disabled={items.length <= 1}
-                  className="p-1.5 text-zinc-400 hover:text-rose-600 hover:bg-rose-50 rounded-[3px] disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-zinc-400 transition-colors cursor-pointer"
+                  className="h-8 w-8 flex items-center justify-center text-zinc-400 hover:text-rose-600 hover:bg-rose-50 rounded-[4px] disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-zinc-400 transition-colors cursor-pointer"
                   title="Remove item"
                   aria-label="Remove item"
                 >
-                  <Trash2 className="h-3.5 w-3.5" />
+                  <Trash2 className="h-4 w-4" />
                 </button>
               </div>
             </div>
 
             {/* Bottom row: Quantity, Rate, Discount, Tax, and Row Total */}
-            <div className="grid grid-cols-2 sm:grid-cols-12 gap-2.5 pt-2 border-t border-zinc-200/70 items-center">
+            <div className="grid grid-cols-2 sm:grid-cols-12 gap-2 sm:gap-2.5 pt-2.5 border-t border-zinc-200/70 items-center">
               {/* Quantity */}
               <div className="col-span-1 sm:col-span-3">
                 <label className="text-[10px] uppercase font-semibold text-zinc-500 block mb-1">
@@ -127,7 +127,7 @@ export function LineItemsTable() {
                   onChange={(e) =>
                     handleNumericChange(item.id, "quantity", e.target.value)
                   }
-                  className="w-full h-8 text-xs bg-white text-zinc-900 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 rounded-[4px] px-2.5 text-right outline-none font-mono shadow-2xs"
+                  className="w-full h-9 text-xs sm:text-[13px] bg-white text-zinc-900 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 rounded-[4px] px-2.5 text-right outline-none font-mono shadow-2xs"
                 />
               </div>
 
@@ -144,7 +144,7 @@ export function LineItemsTable() {
                   onChange={(e) =>
                     handleNumericChange(item.id, "unitPrice", e.target.value)
                   }
-                  className="w-full h-8 text-xs bg-white text-zinc-900 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 rounded-[4px] px-2.5 text-right outline-none font-mono shadow-2xs"
+                  className="w-full h-9 text-xs sm:text-[13px] bg-white text-zinc-900 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 rounded-[4px] px-2.5 text-right outline-none font-mono shadow-2xs"
                 />
               </div>
 
@@ -164,21 +164,23 @@ export function LineItemsTable() {
                     onChange={(e) =>
                       handleNumericChange(item.id, "taxRate", e.target.value)
                     }
-                    className="w-full h-8 text-xs bg-white text-zinc-900 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 rounded-[4px] px-2.5 text-right outline-none font-mono shadow-2xs"
+                    className="w-full h-9 text-xs sm:text-[13px] bg-white text-zinc-900 border border-zinc-200 hover:border-zinc-300 focus:border-zinc-900 rounded-[4px] px-2.5 text-right outline-none font-mono shadow-2xs"
                   />
                 </div>
               )}
 
               {/* Item Total Display */}
               <div
-                className={`col-span-1 ${
-                  isItemTax ? "sm:col-span-4" : "sm:col-span-6"
+                className={`${
+                  isItemTax
+                    ? "col-span-1 sm:col-span-4"
+                    : "col-span-2 sm:col-span-6"
                 } text-right`}
               >
                 <label className="text-[10px] uppercase font-semibold text-zinc-500 block mb-1">
                   Line Total
                 </label>
-                <div className="h-8 flex items-center justify-end font-semibold text-xs text-zinc-900 font-mono bg-zinc-100/90 border border-zinc-200/90 rounded-[4px] px-3 shadow-2xs">
+                <div className="h-9 flex items-center justify-end font-semibold text-xs sm:text-[13px] text-zinc-900 font-mono bg-zinc-100/90 border border-zinc-200/90 rounded-[4px] px-3 shadow-2xs truncate">
                   {formatCurrency(item.total, metadata.currency)}
                 </div>
               </div>
@@ -191,11 +193,11 @@ export function LineItemsTable() {
       <Button
         type="button"
         variant="outline"
-        size="sm"
+        size="md"
         onClick={() => addLineItem()}
-        className="w-full border-dashed border-zinc-300 hover:border-zinc-500 hover:bg-zinc-50 text-xs py-2 h-9 font-medium"
+        className="w-full border-dashed border-zinc-300 hover:border-zinc-500 hover:bg-zinc-50 text-xs sm:text-sm py-2 h-10 font-semibold"
       >
-        <Plus className="h-3.5 w-3.5" />
+        <Plus className="h-4 w-4" />
         Add Line Item
       </Button>
     </div>

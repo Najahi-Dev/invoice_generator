@@ -162,50 +162,50 @@ export function ExportButtons() {
         <Button
           type="button"
           variant="primary"
-          size="sm"
+          size="md"
           isLoading={loadingPdf}
           onClick={handleExportPdf}
-          className="w-full text-xs font-medium"
+          className="w-full text-xs sm:text-[13px] font-semibold h-10 sm:h-9"
         >
-          <FileDown className="h-3.5 w-3.5 shrink-0" />
-          <span>Export PDF</span>
+          <FileDown className="h-4 w-4 shrink-0" />
+          <span>PDF</span>
         </Button>
 
         {/* PNG Export */}
         <Button
           type="button"
           variant="outline"
-          size="sm"
+          size="md"
           isLoading={loadingImage === "png"}
           onClick={() => handleExportImage("png")}
-          className="w-full text-xs font-medium"
+          className="w-full text-xs sm:text-[13px] font-semibold h-10 sm:h-9"
         >
-          <ImageIcon className="h-3.5 w-3.5 shrink-0 text-blue-600" />
-          <span>Export PNG</span>
+          <ImageIcon className="h-4 w-4 shrink-0 text-blue-600" />
+          <span>PNG</span>
         </Button>
 
         {/* Excel Export */}
         <Button
           type="button"
           variant="outline"
-          size="sm"
+          size="md"
           isLoading={loadingExcel}
           onClick={handleExportExcel}
-          className="w-full text-xs font-medium"
+          className="w-full text-xs sm:text-[13px] font-semibold h-10 sm:h-9"
         >
-          <FileSpreadsheet className="h-3.5 w-3.5 shrink-0 text-emerald-600" />
-          <span>Export Excel</span>
+          <FileSpreadsheet className="h-4 w-4 shrink-0 text-emerald-600" />
+          <span>Excel</span>
         </Button>
 
         {/* Direct Print */}
         <Button
           type="button"
           variant="secondary"
-          size="sm"
+          size="md"
           onClick={() => window.print()}
-          className="w-full text-xs font-medium"
+          className="w-full text-xs sm:text-[13px] font-semibold h-10 sm:h-9"
         >
-          <Printer className="h-3.5 w-3.5 shrink-0 text-zinc-700" />
+          <Printer className="h-4 w-4 shrink-0 text-zinc-700" />
           <span>Print</span>
         </Button>
       </div>
